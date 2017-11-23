@@ -1,0 +1,4 @@
+cat a.t
+hello world
+hello hello world hello hellohello
+hello
