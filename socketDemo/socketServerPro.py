@@ -26,7 +26,7 @@ while rlists:
     rs,ws,es = select.select(rlists,wlists,rlists,timeout)
     if not(rs or ws or es):
         print 'time ...'
-        break
+        continue
     for s in rs:
         if s is sock:
             conn,addr=s.accept()
