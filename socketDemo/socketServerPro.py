@@ -6,10 +6,17 @@
 import socket
 import select
 import Queue
+import sys
 
 server = ('192.168.0.105',20072) #ip+interface
+try:
+    #create an AF_INET, STREAM socket (TCP)
+    sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #ip地址簇（socket.AF_INET---ip v4 ,socket.SOCK_STREAM--TCP,  socket.SOCK_DGRAM--UDP)
+except socket.error, e:
+    print 'Failed to create socket. Error code: ' + str(e[0]) + ' , Error message : ' + e[1]
+    sys.exit();
+print 'Socket Created'
 
-sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #ip地址簇（socket.AF_INET---ip v4 ,socket.SOCK_STREAM--TCP,  socket.SOCK_DGRAM--UDP)
 sock.setblocking(False)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) #复用端口号
 

@@ -4,13 +4,19 @@
 
 import socket
 import time
+import sys
 
 server = ('192.168.0.105',20072)
 msg = ['hello','welcome','michael']
 
 socks=[]
 for i in range(10):
-    sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    try:
+        sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    except socket.error, e:
+        print 'Failed to create socket. Error code: ' + str(e[0]) + ' , Error message : ' + e[1]
+        sys.exit();
+    print 'Socket Created'
     socks.append(sock)
 
 for s in socks:
