@@ -35,14 +35,14 @@ while rlists:
         print 'time ...'
         continue
     for s in rs:
-        if s is sock:
-            conn,addr=s.accept()
+        if s is sock: #数组只用对头的sock一个对象，则需要开放接受accept客户端发送的请求
+            conn, addr=s.accept()
             print 'connect by ',addr
             conn.setblocking(False)
-            rlists.append(conn)
-            msg_que[conn]=Queue.Queue()
-        else:
-            data = s.recv(1024)
+            rlists.append(conn) #将新的对象插在rlists队尾，这时rlists更新，并会对相应的rs进行通知响应
+            msg_que[conn]=Queue.Queue() #字典结构，用键值对存储和查找，value值为新的队列
+        else: #当前数组中有新的对象
+            data = s.recv(1024) #服务器端先接收客户端的消息
             if data:
                 print data
                 msg_que[s].put(data)

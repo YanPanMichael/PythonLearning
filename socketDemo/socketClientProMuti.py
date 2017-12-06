@@ -25,10 +25,10 @@ for s in socks:
 counter=0
 for m in msg:
     for s in socks:
-        s.send("The %d send %s"%(counter,m))
+        s.send("The %d send %s"%(counter,m)) #客户端先写消息，发送给服务器
         counter+=1
     for s in socks:
-        data = s.recv(1024)
+        data = s.recv(1024) #之后接收消息，读消息
         print "%s echo %s"%(s.getpeername(),data) #客户端的名字
         if not data:
             s.close()
