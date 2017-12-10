@@ -1,4 +1,5 @@
-#coding="utf-8"
+#coding:"utf-8"
+
 import urllib2
 import re
 
@@ -19,7 +20,10 @@ def get_proxy_from_cnpproxy():
         result = req.read()
         matchs = re.findall(p2, result)
         for item in matchs:
-            print str(item)
+            addr = item[0]
+            content = item[1].decode('utf-8', 'ignore').encode('utf-8')
+            l=[addr,content]
+            print ": ".join(l)
     except urllib2.URLError, e:
         if hasattr(e,"code"):
             print e.code
